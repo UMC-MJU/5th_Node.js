@@ -1,32 +1,32 @@
-import mysql from "mysql2/promise";
+import express from 'express';
+import { response } from './config/response.js';
+import { tempRouter } from './src/routes/temp.route.js';
+import { BaseError } from './config/error.js';
+import { status } from './config/response.status.js';
 
-const dbConnect = async () => {
-    try {
-        const connection = await mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "1234",
-            database: "umc",
-        });
+const app = express();
+const port = 3000;
 
-        console.log("MySQL connection success");
+app.set('port', 3000)
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
-        await queryExample(connection);
+app.use('/temp', tempRouter);
 
-        await connection.end();
-    } catch (error) {
-        console.error("MySQL connection error:", error.message);
-    }
-};
+app.use((req, res, next) => {
+    const err = new BaseError(status.NOT_FOUND);
+    next(err);
+});
 
-const queryExample = async (connection) => {
-    try {
-        const [rows, fields] = await connection.execute("SELECT * FROM user");
-        console.log("Query results:", rows);
-    } catch (error) {
-        console.error("Error executing query:", error.message);
-    }
-};
+app.use((err, req, res, next) => {
+    console.log(err.data.status);
+    console.log(err.data.message);
+    res.locals.message = err.message;
+    res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
+    res.status(err.data.status).send(response(err.data));
+});
 
-dbConnect();
-
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+});
