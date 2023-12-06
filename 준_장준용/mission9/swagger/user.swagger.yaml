@@ -1,0 +1,304 @@
+/user/signin:
+    post:
+      tags:
+        - Customer
+      summary: 회원가입
+      parameters:
+      - name: signin
+        in: body
+        required: true
+        schema:
+          properties:
+            id:
+              type: integer
+              description: 유저 아이디
+              example: 1203
+            email:
+              type: string
+              description: 유저 이메일
+              example: swaggerTest@mail.com
+            name:
+              type: string
+              description: 유저 이름
+              example: swagger
+            nickname:
+              type: string
+              description: 유저 별명
+              example: joon
+            gender:
+              type: string
+              
+              description: 유저 성별
+              example: 1
+            birth_date:
+              type: string
+              description: 유저 생년월일
+              example: 2000-02-21
+            state:
+              type: string
+              
+              description: 활성
+              example: 1
+            phone:
+              type: string
+              description: 전화 번호
+              example: 010-0000-0000
+            prefer:
+              type: array
+              description: 선호 카테고리 번호
+              example: [1, 3, 5]
+      responses:
+        '200':
+          description: 회원 가입 성공!
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              isSuccess:
+                type: boolean
+                example: true
+              code:
+                type: integer
+                example: 2000
+              message:
+                type: string
+                example: "success!"
+              data:
+                type: object
+                example: {
+                  "email": "swaggerTest@mail.com",
+                  "name": "swagger",
+                  "preferCategory": [
+                    "한식",
+                    "일식"
+                  ]
+                }
+                
+        '400':
+          description: 잘못된 요청
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 400
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON001
+              message:
+                type: string
+                example: 잘못된 요청입니다
+
+        '500':
+          description: 서버 에러
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 500
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON000
+              message:
+                type: string
+                example: 서버 에러, 관리자에게 문의 바랍니다.
+
+/user/review:
+    post:
+      tags:
+        - Customer
+      summary: 리뷰
+      parameters:
+      - name: review
+        in: body
+        required: true
+        schema:
+          properties:
+            star:
+              type: integer
+              description: 리뷰 평점
+              example: 3
+            description:
+              type: string
+              description: 리뷰 내용
+              example: 정말 맛있어요
+            user:
+              type: integer
+              description: 유저 아이디
+              example: 1
+            restaurant:
+              type: integer
+              description: 식당 아이디
+              example: 1
+            
+      responses:
+        '200':
+          description: 회원 가입 성공!
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              isSuccess:
+                type: boolean
+                example: true
+              code:
+                type: integer
+                example: 2000
+              message:
+                type: string
+                example: "success!"
+              data:
+                type: object
+                example: {
+                  "식당": "1",
+                  "유저": "1",
+                  "review": "좋아요",
+                  "평점":"5"
+                }
+                
+        '400':
+          description: 잘못된 요청
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 400
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON001
+              message:
+                type: string
+                example: 잘못된 요청입니다
+
+        '500':
+          description: 서버 에러
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 500
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON000
+              message:
+                type: string
+                example: 서버 에러, 관리자에게 문의 바랍니다.
+
+
+/user/mission:
+    post:
+      tags:
+        - Customer
+      summary: 미션
+      parameters:
+      - name: mission
+        in: body
+        required: true
+        schema:
+          properties:
+            is_success:
+              type: boolean
+              description: 성공여부
+              example: false
+            key:
+              type: integer
+              description: 인증키
+              example: 1283
+            cost:
+              type: int
+              description: 성공 포인트
+              example: 500
+            state:
+              type: integer
+              description: 상태(1:성공,2:진행중,3:완료)
+              example: 2
+            customer:
+             type: integer
+             description : 고객
+             example : 1
+            mission:
+             type: integer
+             description : 미션
+             example : 1
+            
+      responses:
+        '200':
+          description: 미션 불러오기 성공!
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              isSuccess:
+                type: boolean
+                example: true
+              code:
+                type: integer
+                example: 2000
+              message:
+                type: string
+                example: "success!"
+              data:
+                type: object
+                example: {
+                  "미션": "1",
+                  "유저": "1",
+                  "state" : "진행중"
+
+                }
+                
+        '400':
+          description: 잘못된 요청
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 400
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON001
+              message:
+                type: string
+                example: 잘못된 요청입니다
+
+        '500':
+          description: 서버 에러
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 500
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON000
+              message:
+                type: string
+                example: 서버 에러, 관리자에게 문의 바랍니다.

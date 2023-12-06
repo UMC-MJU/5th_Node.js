@@ -1,0 +1,197 @@
+/owner/restraunt:
+    post:
+      tags:
+        - Owner
+      summary: 식당관리
+      parameters:
+      - name: restraunt
+        in: body
+        required: true
+        schema:
+          properties:
+            id:
+              type: integer
+              description: 식당 아이디
+              example: 123
+            name:
+              type: string
+              description: 식당이름
+              example: swaggerRestraunt
+            description:
+              type: string
+              description: 식당설명
+              example: 맛있어요
+            location:
+              type: integer
+              description: 지역번호
+              example: 1
+            location_name:
+              type: string
+              description: 지역 이름
+              example: "경기도 시흥시"
+            owner:
+              type: string
+              description: 점주
+              example: 1
+            
+      responses:
+        '200':
+          description: 식당 추가 성공!
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              isSuccess:
+                type: boolean
+                example: true
+              code:
+                type: integer
+                example: 2000
+              message:
+                type: string
+                example: "success!"
+              data:
+                type: object
+                example: {
+                  "id" : "12",
+                  "name" : "swaagerRestraunt",
+                  "location" : "1",
+                  "location_name" : "location_name"
+                }
+                
+        '400':
+          description: 잘못된 요청
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 400
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON001
+              message:
+                type: string
+                example: 잘못된 요청입니다
+
+        '500':
+          description: 서버 에러
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 500
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON000
+              message:
+                type: string
+                example: 서버 에러, 관리자에게 문의 바랍니다.
+
+
+
+
+/owner/mission:
+    post:
+      tags:
+        - Owner
+      summary: 미션관리
+      parameters:
+      - name: restrauntMission
+        in: body
+        required: true
+        schema:
+          properties:
+            id:
+              type: integer
+              description:  미션아이디
+              example: 123
+            description:
+              type: string
+              description: 미션설명
+              example: 맛있게 드시오
+            reward:
+              type: integer
+              description: 보상
+              example: 500
+            target_cost:
+              type: integer
+              description: 목표 금액
+              example: 200000
+            restaurant:
+              type: integer
+              description: 식당
+              example: 1
+            
+      responses:
+        '200':
+          description: 미션 추가 성공!
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              isSuccess:
+                type: boolean
+                example: true
+              code:
+                type: integer
+                example: 2000
+              message:
+                type: string
+                example: "success!"
+              data:
+                type: object
+                example: {
+                  "id" : "123",
+                  "description" : "맛있게 드세요",
+                  "restaurant" : '1',
+                  "target_point": '500',
+                  "reward" : '500'
+                }
+                
+        '400':
+          description: 잘못된 요청
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 400
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON001
+              message:
+                type: string
+                example: 잘못된 요청입니다
+
+        '500':
+          description: 서버 에러
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 500
+              isSuccess:
+                type: boolean
+                example: false
+              code:
+                type: integer
+                example: COMMON000
+              message:
+                type: string
+                example: 서버 에러, 관리자에게 문의 바랍니다.
